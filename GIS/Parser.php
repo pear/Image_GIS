@@ -107,14 +107,19 @@ class Image_GIS_Parser {
     function parse() {
         foreach ($this->dataFiles as $dataFile => $color) {
             $cacheID = md5($dataFile . '_' . $color);
+            $lineSet = false;
 
             if (is_object($this->cache) &&
                 $lineSet = $this->cache->get($cacheID, 'Image_GIS')) {
                 $lineSet = unserialize($lineSet);
-            } else {
+            }
+
+            if ($lineSet === false) {
                 $lineSet = $this->parseFile($dataFile, $color);
 
-                $this->cache->save(serialize($lineSet), $cacheID, 'Image_GIS');
+                if (is_object($this->cache)) {
+                    $this->cache->save(serialize($lineSet), $cacheID, 'Image_GIS');
+                }
             }
 
             $this->lineSets[] = $lineSet;
