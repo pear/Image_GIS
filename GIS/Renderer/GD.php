@@ -30,18 +30,18 @@ require_once 'Image/GIS/Renderer.php';
  */
 class Image_GIS_Renderer_GD extends Image_GIS_Renderer {
     /**
-    * GD Image Ressource.
-    *
-    * @var ressource $image
-    */
-    private $image;
-
-    /**
     * GD Image Palette.
     *
     * @var array $palette
     */
-    private $palette = array();
+    var $palette = array();
+
+    /**
+    * GD Image Ressource.
+    *
+    * @var ressource $img
+    */
+    var $img;
 
     /**
     * Constructor.
@@ -51,19 +51,19 @@ class Image_GIS_Renderer_GD extends Image_GIS_Renderer {
     * @param  boolean $debug
     * @access public
     */
-    public function __construct($width, $height, $debug) {
+    function Image_GIS_Renderer_GD($width, $height, $debug) {
         if (is_file($width)) {
-            $this->image = imagecreatefrompng($width);
+            $this->img = imagecreatefrompng($width);
+            $width     = imagesx($this->img);
+            $height    = imagesy($this->img);
 
-            $width  = imagesx($this->image);
-            $height = imagesy($this->image);
+            $this->Image_GIS_Renderer($width, $height, $debug);
         } else {
-            $this->image = imagecreate($this->width, $this->height);
+            $this->Image_GIS_Renderer($width, $height, $debug);
 
-            imagecolorallocate($this->image, 255, 255, 255);
+            $this->img = imagecreate($this->width, $this->height);
+            imagecolorallocate($this->img, 255, 255, 255);
         }
-
-        $this->Image_GIS_Renderer($width, $height, $debug);
     }
 
     /**
@@ -79,13 +79,13 @@ class Image_GIS_Renderer_GD extends Image_GIS_Renderer {
     * @param  float   $b
     * @access public
     */
-    public function drawLine($x1, $y1, $x2, $y2, $r, $g, $b) {
+    function drawLine($x1, $y1, $x2, $y2, $r, $g, $b) {
         if (!isset($this->palette[$r][$g][$b])) {
-            $this->palette[$r][$g][$b] = imagecolorallocate($this->image, $r, $g, $b);
+            $this->palette[$r][$g][$b] = imagecolorallocate($this->img, $r, $g, $b);
         }
 
         imageline(
-          $this->image,
+          $this->img,
           $x1,
           $y1,
           $x2,
@@ -101,8 +101,8 @@ class Image_GIS_Renderer_GD extends Image_GIS_Renderer {
     * @return boolean
     * @access public
     */
-    public function saveImage($filename) {
-        return imagepng($this->image, $filename);
+    function saveImage($filename) {
+        return imagepng($this->img, $filename);
     }
 
     /**
@@ -110,9 +110,9 @@ class Image_GIS_Renderer_GD extends Image_GIS_Renderer {
     *
     * @access public
     */
-    public function showImage() {
+    function showImage() {
         header('Content-Type: image/png');
-        imagepng($this->image);
+        imagepng($this->img);
     }
 }
 ?>

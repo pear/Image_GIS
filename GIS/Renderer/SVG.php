@@ -34,14 +34,14 @@ class Image_GIS_Renderer_SVG extends Image_GIS_Renderer {
     *
     * @var XML_SVG $svg
     */
-    private $svg;
+    var $svg;
 
     /**
     * SVG Groups.
     *
     * @var XML_SVG_Group[]
     */
-    private $svgGroups = array();
+    var $svgGroups = array();
 
     /**
     * Constructor.
@@ -51,7 +51,7 @@ class Image_GIS_Renderer_SVG extends Image_GIS_Renderer {
     * @param  boolean $debug
     * @access public
     */
-    public function __construct($width, $height, $debug) {
+    function Image_GIS_Renderer_SVG($width, $height, $debug) {
         $this->Image_GIS_Renderer($width, $height, $debug);
 
         $this->svg = new XML_SVG_Document(
@@ -75,7 +75,7 @@ class Image_GIS_Renderer_SVG extends Image_GIS_Renderer {
     * @param  float   $b
     * @access public
     */
-    public function drawLine($x1, $y1, $x2, $y2, $r, $g, $b) {
+    function drawLine($x1, $y1, $x2, $y2, $r, $g, $b) {
         $group = md5($r . $g . $b);
 
         if (!isset($this->svgGroups[$group])) {
@@ -113,7 +113,7 @@ class Image_GIS_Renderer_SVG extends Image_GIS_Renderer {
     * @return boolean
     * @access public
     */
-    public function saveImage($filename) {
+    function saveImage($filename) {
         if ($fp = @fopen($filename, 'w')) {
             @fputs($fp, $this->svg->bufferObject());
             @fclose($fp);
@@ -129,7 +129,7 @@ class Image_GIS_Renderer_SVG extends Image_GIS_Renderer {
     *
     * @access public
     */
-    public function showImage() {
+    function showImage() {
         $this->svg->printElement();
     }
 }

@@ -29,37 +29,37 @@ require_once 'Image/Color.php';
  * @package     Image_GIS
  * @abstract
  */
-abstract class Image_GIS_Renderer {
+class Image_GIS_Renderer {
     /**
     * Set to TRUE to enable debugging.
     *
     * @var boolean $debug
     */
-    protected $debug;
+    var $debug;
 
     /**
     * @var array $min
     */
-    protected $min = false;
+    var $min = false;
 
     /**
     * @var array $max
     */
-    protected $max = false;
+    var $max = false;
 
     /**
     * Width of the image.
     *
     * @var integer $width
     */
-    protected $width;
+    var $width;
 
     /**
     * Height of the image.
     *
     * @var integer $height
     */
-    protected $height;
+    var $height;
 
     /**
     * Constructor.
@@ -69,7 +69,7 @@ abstract class Image_GIS_Renderer {
     * @param  boolean $debug
     * @access public
     */
-    public function Image_GIS_Renderer($width, $height, $debug) {
+    function Image_GIS_Renderer($width, $height, $debug) {
         $this->debug  = $debug;
 
         if ($width < 0 ||
@@ -96,7 +96,7 @@ abstract class Image_GIS_Renderer {
     * @return object
     * @access public
     */
-    public static function factory($renderer, $width, $height, $debug) {
+    function &factory($renderer, $width, $height, $debug) {
         if (@include_once('Image/GIS/Renderer/' . $renderer . '.php')) {
             $class  = 'Image_GIS_Renderer_' . $renderer;
             $object = new $class($width, $height, $debug);
@@ -116,7 +116,7 @@ abstract class Image_GIS_Renderer {
     * @param  mixed $color
     * @access public
     */
-    public function drawClippedLine($x1, $y1, $x2, $y2, $color) {
+    function drawClippedLine($x1, $y1, $x2, $y2, $color) {
         if (($x1 > $this->max['x']  ||
              $x1 < $this->min['x']  ||
              $y1 > $this->max['y']  ||
@@ -156,7 +156,7 @@ abstract class Image_GIS_Renderer {
     * @access public
     * @since  Image_GIS 1.0.1
     */
-    public function getRange() {
+    function getRange() {
         return array(
           $this->min['x'],
           $this->max['x'],
@@ -172,7 +172,7 @@ abstract class Image_GIS_Renderer {
     * @param  string $direction
     * @access public
     */
-    public function polar2image($polarCoordinate, $direction) {
+    function polar2image($polarCoordinate, $direction) {
         switch ($direction) {
             case 'x': {
                 return ($polarCoordinate - $this->min[$direction]) *
@@ -194,7 +194,7 @@ abstract class Image_GIS_Renderer {
     * @param  array $lineSets
     * @access public
     */
-    public function render($lineSets) {
+    function render($lineSets) {
         if ($this->min == false || $this->max == false) {
             $this->min = array(
               'x' => 0,
@@ -230,7 +230,7 @@ abstract class Image_GIS_Renderer {
     * @param  float $y2
     * @access public
     */
-    public function setRange($x1, $x2, $y1, $y2) {
+    function setRange($x1, $x2, $y1, $y2) {
         $this->min = array('x' => $x1, 'y' => $y1);
         $this->max = array('x' => $x2, 'y' => $y2);
     }
@@ -249,7 +249,7 @@ abstract class Image_GIS_Renderer {
     * @access public
     * @abstract
     */
-    public abstract function drawLine($x1, $y1, $x2, $y2, $r, $g, $b);
+    function drawLine($x1, $y1, $x2, $y2, $r, $g, $b) { /* abstract */ }
 
     /**
     * Saves the rendered image to a given file.
@@ -259,7 +259,7 @@ abstract class Image_GIS_Renderer {
     * @access public
     * @abstract
     */
-    public abstract function saveImage($filename);
+    function saveImage($filename) { /* abstract */ }
 
     /**
     * Shows the rendered image.
@@ -267,6 +267,6 @@ abstract class Image_GIS_Renderer {
     * @access public
     * @abstract
     */
-    public abstract function showImage();
+    function showImage() { /* abstract */ }
 }
 ?>

@@ -28,34 +28,34 @@ require_once 'Image/GIS/LineSet.php';
  * @category    Image
  * @package     Image_GIS
  */
-abstract class Image_GIS_Parser {
+class Image_GIS_Parser {
     /**
     * Cache.
     *
     * @var Cache_Lite $cache
     */
-    protected $cache = NULL;
+    var $cache = NULL;
 
     /**
     * Data Files.
     *
     * @var array $dataFiles
     */
-    protected $dataFiles = array();
+    var $dataFiles = array();
 
     /**
     * Set to TRUE to enable debugging.
     *
     * @var boolean $debug
     */
-    protected $debug;
+    var $debug;
 
     /**
     * Line Set.
     *
     * @var array $lineSets
     */
-    protected $lineSets = array();
+    var $lineSets = array();
 
     /**
     * Constructor.
@@ -64,7 +64,7 @@ abstract class Image_GIS_Parser {
     * @param  boolean $debug
     * @access public
     */
-    public function Image_GIS_Parser($cache, $debug) {
+    function Image_GIS_Parser($cache, $debug) {
         if ($cache) {
             $this->cache = new Cache_Lite;
         }
@@ -81,7 +81,7 @@ abstract class Image_GIS_Parser {
     * @return object
     * @access public
     */
-    public static function factory($parser, $cache, $debug) {
+    function &factory($parser, $cache, $debug) {
         include_once 'Image/GIS/Parser/' . $parser . '.php';
 
         $class  = 'Image_GIS_Parser_' . $parser;
@@ -97,7 +97,7 @@ abstract class Image_GIS_Parser {
     * @param  mixed   $color
     * @access public
     */
-    public function addDataFile($dataFile, $color) {
+    function addDataFile($dataFile, $color) {
         $this->dataFiles[$dataFile] = $color;
     }
 
@@ -107,7 +107,7 @@ abstract class Image_GIS_Parser {
     * @access public
     * @return array
     */
-    public function parse() {
+    function parse() {
         foreach ($this->dataFiles as $dataFile => $color) {
             $cacheID = md5($dataFile . '_' . $color);
             $lineSet = false;
@@ -140,6 +140,6 @@ abstract class Image_GIS_Parser {
     * @access public
     * @abstract
     */
-    public abstract function parseFile($dataFile, $color);
+    function parseFile($dataFile, $color) { /* abstract */ }
 }
 ?>

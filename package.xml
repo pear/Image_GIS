@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
 <!DOCTYPE package SYSTEM "http://pear.php.net/dtd/package-1.0">
 <package version="1.0">
-  <name>Image_GIS2</name>
+  <name>Image_GIS</name>
   <summary>Visualization of GIS data.</summary>
   <description>
 Generating maps on demand can be a hard job as most often you don't
@@ -28,14 +28,31 @@ produce images using GD or Scalable Vector Graphics (SVG).
   </maintainers>
   <license>PHP License</license>
   <release>
-    <version>2.0.0</version>
+    <version>1.1.0</version>
     <state>stable</state>
-    <date>2004-MM-DD</date>
+    <date>2004-01-06</date>
     <notes>
 <![CDATA[
-* Refactored using PHP 5 syntax.
++ Added caching of parsed data files.
 
-! PHP 5.0.0 (or higher) is now required.
++ Added getRange() method to the Image_GIS and Image_GIS_Renderer
+  classes.
+
+* Changed the Image_GIS constructor to accept an associative
+  parameter array as its only argument.
+
+  Note: This breaks backwards compatibility.
+
+* The SVG renderer now uses the XML_SVG package instead of the
+  XML_Tree package.
+
+* Factored the handling of Line Sets out into a separate class.
+
+* Fixed handling of negative coordinates.
+
+* Fixed a bug that kept a debugging message from beeing printed.
+
+* Fixed incompatibilities with PHP 5.
 ]]>
     </notes>
     <filelist>
@@ -66,35 +83,6 @@ produce images using GD or Scalable Vector Graphics (SVG).
     </deps>
   </release>
   <changelog>
-    <release>
-      <version>1.1.0</version>
-      <state>stable</state>
-      <date>2004-01-06</date>
-      <notes>
-<![CDATA[
-+ Added caching of parsed data files.
-
-+ Added getRange() method to the Image_GIS and Image_GIS_Renderer
-  classes.
-
-* Changed the Image_GIS constructor to accept an associative
-  parameter array as its only argument.
-
-  Note: This breaks backwards compatibility.
-
-* The SVG renderer now uses the XML_SVG package instead of the
-  XML_Tree package.
-
-* Factored the handling of Line Sets out into a separate class.
-
-* Fixed handling of negative coordinates.
-
-* Fixed a bug that kept a debugging message from beeing printed.
-
-* Fixed incompatibilities with PHP 5.
-]]>
-      </notes>
-    </release>
     <release>
       <version>1.0.0</version>
       <state>stable</state>

@@ -37,7 +37,7 @@ class Image_GIS_Parser_E00 extends Image_GIS_Parser {
     * @param  boolean $debug
     * @access public
     */
-    public function Image_GIS_Parser_E00($cache, $debug) {
+    function Image_GIS_Parser_E00($cache, $debug) {
         $this->Image_GIS_Parser($cache, $debug);
     }
 
@@ -49,15 +49,15 @@ class Image_GIS_Parser_E00 extends Image_GIS_Parser {
     * @return mixed
     * @access public
     */
-    public function parseFile($dataFile, $color) {
+    function parseFile($dataFile, $color) {
         $lineSet = new Image_GIS_LineSet($color);
 
         if ($fp = @fopen($dataFile, 'r')) {
             $numRecords = 0;
-            $lineNum    = 0;
+            $ln         = 0;
 
             while(0 || $line = fgets($fp, 1024)) {
-                $lineNum++;
+                $ln ++;
 
                 if ($numRecords == 0 && 
                     preg_match("#^\s+([0-9]+)\s+([-0-9]+)\s+([0-9]+)\s+([0-9]+)\s+([0-9]+)\s+([0-9]+)\s+([0-9]+)#", $line, $a)) {
@@ -101,13 +101,13 @@ class Image_GIS_Parser_E00 extends Image_GIS_Parser {
                     $numRecords--;
                 }
 
-                else if ($lineNum > 2) {
-                    if ($this->debug) {
-                        printf(
-                          'Died at: %s<br />',
-                          $lineNum
-                        );
-                    }
+                else if ($ln > 2) {
+		    if ($this->debug) {
+			printf(
+			       'Died at: %s<br />',
+			       $ln
+			       );
+		    }
 
                     break;
                 }
