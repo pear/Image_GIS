@@ -70,6 +70,7 @@ produce images using GD or Scalable Vector Graphics (SVG).
     </filelist>
     <deps>
       <dep type="ext" rel="has">gd</dep>
+      <dep type="pkg" rel="has">Cache_Lite</dep>
       <dep type="pkg" rel="has">Image_Color</dep>
       <dep type="pkg" rel="has">XML_Tree</dep>
     </deps>
