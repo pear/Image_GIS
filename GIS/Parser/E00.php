@@ -94,7 +94,7 @@ class Image_GIS_Parser_E00 extends Image_GIS_Parser {
                 }
 
                 else if ($this->debug && $ln > 2) {
-                    sprintf(
+                    printf(
                       'Died at: %s<br />',
                       $ln
                     );
