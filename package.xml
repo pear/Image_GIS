@@ -38,6 +38,11 @@ produce images using GD or Scalable Vector Graphics (SVG).
 + Added getRange() method to the Image_GIS and Image_GIS_Renderer
   classes.
 
+* Changed the Image_GIS constructor to accept an associative
+  parameter array as its only argument.
+
+  Note: This breaks backwards compatibility.
+
 * Factored the handling of Line Sets out into a separate class.
 
 * Fixed a bug that kept a debugging message from beeing printed.
