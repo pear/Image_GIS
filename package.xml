@@ -33,6 +33,8 @@ produce images using GD or Scalable Vector Graphics (SVG).
     <date>200Y-MM-DD</date>
     <notes>
 <![CDATA[
+* Fixed bug #1179.
+
 * Added/fixed phpDocumentor code documentation.
 ]]>
     </notes>
