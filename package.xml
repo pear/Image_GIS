@@ -43,6 +43,9 @@ produce images using GD or Scalable Vector Graphics (SVG).
 
   Note: This breaks backwards compatibility.
 
+* The SVG renderer now uses the XML_SVG package instead of the
+  XML_Tree package.
+
 * Factored the handling of Line Sets out into a separate class.
 
 * Fixed a bug that kept a debugging message from beeing printed.
@@ -74,7 +77,7 @@ produce images using GD or Scalable Vector Graphics (SVG).
       <dep type="ext" rel="has">gd</dep>
       <dep type="pkg" rel="has">Cache_Lite</dep>
       <dep type="pkg" rel="has">Image_Color</dep>
-      <dep type="pkg" rel="has">XML_Tree</dep>
+      <dep type="pkg" rel="has">XML_SVG</dep>
     </deps>
   </release>
   <changelog>

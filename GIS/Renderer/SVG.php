@@ -17,7 +17,7 @@
 //
 
 require_once 'Image/GIS/Renderer.php';
-require_once 'XML/Tree.php';
+require_once 'XML/SVG.php';
 
 /**
 * SVG Renderer.
@@ -29,16 +29,16 @@ class Image_GIS_Renderer_SVG extends Image_GIS_Renderer {
     /**
     * SVG Document.
     *
-    * @var XML_Tree $svg
+    * @var XML_SVG $svg
     */
     var $svg;
 
     /**
-    * SVG Document Root.
+    * SVG Groups.
     *
-    * @var XML_Tree_Node $root
+    * @var XML_SVG_Group[]
     */
-    var $root;
+    var $svgGroups = array();
 
     /**
     * Constructor.
@@ -51,13 +51,10 @@ class Image_GIS_Renderer_SVG extends Image_GIS_Renderer {
     function Image_GIS_Renderer_SVG($width, $height, $debug) {
         $this->Image_GIS_Renderer($width, $height, $debug);
 
-        $this->svg  = new XML_Tree;
-        $this->root = &$this->svg->addRoot(
-          'svg',
-          '',
+        $this->svg = new XML_SVG_Document(
           array(
-            'width'  => $this->width,
-            'height' => $this->height
+            'width'  => $width,
+            'height' => $height
           )
         );
     }
@@ -76,22 +73,34 @@ class Image_GIS_Renderer_SVG extends Image_GIS_Renderer {
     * @access public
     */
     function drawLine($x1, $y1, $x2, $y2, $r, $g, $b) {
-        $line = &$this->root->addChild(
-          'line',
-          '',
+        $group = md5($r . $g . $b);
+
+        if (!isset($this->svgGroups[$group])) {
+            $this->svgGroups[$group] = new XML_SVG_Group(
+              array(
+                'style' => sprintf(
+                  'stroke:rgb(%s, %s, %s)',
+
+                  $r,
+                  $g,
+                  $b
+                )
+              )
+            );
+
+            $this->svgGroups[$group]->addParent($this->svg);
+        }
+
+        $line = new XML_SVG_Line(
           array(
             'x1'    => $x1,
             'y1'    => $y1,
             'x2'    => $x2,
             'y2'    => $y2,
-            'style' => sprintf(
-              'stroke:rgb(%s, %s, %s)',
-              $r,
-              $g,
-              $b
-            )
           )
         );
+
+        $this->svgGroups[$group]->addChild($line);
     }
 
     /**
@@ -103,7 +112,7 @@ class Image_GIS_Renderer_SVG extends Image_GIS_Renderer {
     */
     function saveImage($filename) {
         if ($fp = @fopen($filename, 'w')) {
-            @fputs($fp, $this->root->get());
+            @fputs($fp, $this->svg->bufferObject());
             @fclose($fp);
 
             return true;
@@ -118,8 +127,7 @@ class Image_GIS_Renderer_SVG extends Image_GIS_Renderer {
     * @access public
     */
     function showImage() {
-        header('Content-Type: image/svg+xml');
-        echo $this->root->get();
+        $this->svg->printElement();
     }
 }
 ?>
