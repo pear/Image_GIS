@@ -3,7 +3,7 @@
 // +------------------------------------------------------------------------+
 // | PEAR :: Image :: GIS                                                   |
 // +------------------------------------------------------------------------+
-// | Copyright (c) 2002-2003 Jan Kneschke <jan@kneschke.de> and             |
+// | Copyright (c) 2002-2003-2003 Jan Kneschke <jan@kneschke.de> and             |
 // |                         Sebastian Bergmann <sb@sebastian-bergmann.de>. |
 // +------------------------------------------------------------------------+
 // | This source file is subject to version 3.00 of the PHP License,        |
