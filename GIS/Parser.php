@@ -16,6 +16,9 @@
 // $Id$
 //
 
+require_once 'Cache/Lite.php';
+require_once 'Image/GIS/LineSet.php';
+
 /**
 * Parser Base Class.
 *
@@ -23,6 +26,13 @@
 * @since    Image_GIS 1.0.0
 */
 class Image_GIS_Parser {
+    /**
+    * Cache.
+    *
+    * @var Cache_Lite $cache
+    */
+    var $cache;
+
     /**
     * Data Files.
     *
@@ -38,27 +48,11 @@ class Image_GIS_Parser {
     var $debug;
 
     /**
-    * Lines.
+    * Line Set.
     *
-    * @var array $lines
+    * @var array $lineSets
     */
-    var $lines = array();
-
-    /**
-    * @var array $min
-    */
-    var $min = array(
-      'x' => 0,
-      'y' => 0
-    );
-
-    /**
-    * @var array $max
-    */
-    var $max = array(
-      'x' => 0,
-      'y' => 0
-    );
+    var $lineSets = array();
 
     /**
     * Constructor.
@@ -67,6 +61,7 @@ class Image_GIS_Parser {
     * @access public
     */
     function Image_GIS_Parser($debug) {
+        $this->cache = new Cache_Lite;
         $this->debug = $debug;
     }
 
@@ -83,25 +78,6 @@ class Image_GIS_Parser {
 
         $class = 'Image_GIS_Parser_' . $parser;
         return new $class($debug);
-    }
-
-    /**
-    * Adds a line to the map.
-    *
-    * @param  float $x1
-    * @param  float $y1
-    * @param  float $x2
-    * @param  float $y2
-    * @param  mixed $color
-    * @access public
-    */
-    function addLine($x1, $y1, $x2, $y2, $color) {
-        $this->lines[] = array($x1, $y1, $x2, $y2, $color);
-
-        $this->min['x'] = min($this->min['x'], $x1, $x2);
-        $this->min['y'] = min($this->min['y'], $y1, $y2);
-        $this->max['x'] = max($this->max['x'], $x1, $x2);
-        $this->max['y'] = max($this->max['y'], $y1, $y2);
     }
 
     /**
@@ -123,10 +99,20 @@ class Image_GIS_Parser {
     */
     function parse() {
         foreach ($this->dataFiles as $dataFile => $color) {
-            $this->parseFile($dataFile, $color);
+            $cacheID = md5($dataFile . '_' . $color);
+
+            if ($lineSet = $this->cache->get($cacheID, 'Image_GIS')) {
+                $lineSet = unserialize($lineSet);
+            } else {
+                $lineSet = $this->parseFile($dataFile, $color);
+
+                $this->cache->save(serialize($lineSet), $cacheID, 'Image_GIS');
+            }
+
+            $this->lineSets[] = $lineSet;
         }
 
-        return array($this->lines, $this->min, $this->max);
+        return $this->lineSets;
     }
 
     /**
@@ -134,6 +120,7 @@ class Image_GIS_Parser {
     *
     * @param  string  $dataFile
     * @param  mixed   $color
+    * @return mixed
     * @access public
     * @abstract
     */

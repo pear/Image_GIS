@@ -16,6 +16,7 @@
 // $Id$
 //
 
+require_once 'Image/GIS/LineSet.php';
 require_once 'Image/GIS/Parser.php';
 
 /**
@@ -40,10 +41,12 @@ class Image_GIS_Parser_E00 extends Image_GIS_Parser {
     *
     * @param  string  $dataFile
     * @param  mixed   $color
-    * @return boolean
+    * @return mixed
     * @access public
     */
     function parseFile($dataFile, $color) {
+        $lineSet = new Image_GIS_LineSet($color);
+
         if ($fp = @fopen($dataFile, 'r')) {
             $numRecords = 0;
             $ln         = 0;
@@ -67,12 +70,12 @@ class Image_GIS_Parser_E00 extends Image_GIS_Parser {
 
                     if ($pl['x'] != -1 &&
                         $pl['y'] != -1) {
-                        $this->addLine($pl['x'], $pl['y'], $a[1], $a[2], $color);
+                        $lineSet->addLine($pl['x'], $pl['y'], $a[1], $a[2]);
                     }
 
                     $numRecords--;
 
-                    $this->addLine($a[1], $a[2], $a[3], $a[4], $color);
+                    $lineSet->addLine($a[1], $a[2], $a[3], $a[4]);
 
                     $pl['x'] = $a[3];
                     $pl['y'] = $a[4];
@@ -84,7 +87,7 @@ class Image_GIS_Parser_E00 extends Image_GIS_Parser {
                          preg_match("#^ ([0-9]\.[0-9]{7}E[-+][0-9]{2}) ([0-9]\.[0-9]{7}E[-+][0-9]{2})#", $line, $a)) {
                     if ($pl['x'] != -1 &&
                         $pl['y'] != -1) {
-                        $this->addLine($pl['x'], $pl['y'], $a[1], $a[2], $color);
+                        $lineSet->addLine($pl['x'], $pl['y'], $a[1], $a[2]);
 
                         $pl['x'] = $a[1];
                         $pl['y'] = $a[2];
@@ -109,7 +112,7 @@ class Image_GIS_Parser_E00 extends Image_GIS_Parser {
 
             @fclose($fp);
 
-            return true;
+            return $lineSet;
         }
 
         return false;

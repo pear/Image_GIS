@@ -184,12 +184,33 @@ class Image_GIS_Renderer {
     /**
     * Renders the image.
     *
-    * @param  array $lines
+    * @param  array $lineSets
     * @access public
     */
-    function render($lines) {
-        foreach ($lines as $line) {
-            $this->drawClippedLine($line[0], $line[1], $line[2], $line[3], $line[4]);
+    function render($lineSets) {
+        if ($this->min == false || $this->max == false) {
+            $this->min = array(
+              'x' => 0,
+              'y' => 0
+            );
+
+            $this->max = array(
+              'x' => 0,
+              'y' => 0
+            );
+
+            foreach ($lineSets as $lineSet) {
+                $this->min['x'] = min($this->min['x'], $lineSet->min['x']);
+                $this->min['y'] = min($this->min['y'], $lineSet->min['y']);
+                $this->max['x'] = max($this->max['x'], $lineSet->max['x']);
+                $this->max['y'] = max($this->max['y'], $lineSet->max['y']);
+            }
+        }
+
+        foreach ($lineSets as $lineSet) {
+            foreach ($lineSet->lines as $line) {
+                $this->drawClippedLine($line[0], $line[1], $line[2], $line[3], $lineSet->color);
+            }
         }
     }
 

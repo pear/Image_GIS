@@ -33,8 +33,12 @@ produce images using GD or Scalable Vector Graphics (SVG).
     <date>YYYY-MM-DD</date>
     <notes>
 <![CDATA[
-* Added getRange() method to the Image_GIS and Image_GIS_Renderer
++ Added caching of parsed data files.
+
++ Added getRange() method to the Image_GIS and Image_GIS_Renderer
   classes.
+
+* Factored the handling of Line Sets out into a separate class.
 
 * Fixed a bug that kept a debugging message from beeing printed.
 ]]>
@@ -51,6 +55,7 @@ produce images using GD or Scalable Vector Graphics (SVG).
             <file role="php" name="SVG.php"/>
           </dir>
 
+          <file role="php" name="LineSet.php"/>
           <file role="php" name="Parser.php"/>
           <file role="php" name="Renderer.php"/>
         </dir>

@@ -121,15 +121,7 @@ class Image_GIS {
     * @access public
     */
     function render() {
-        list($lines, $min, $max) = $this->parser->parse();
-
-        if ($this->renderer->min == false ||
-            $this->renderer->max == false) {
-            $this->renderer->min = $min;
-            $this->renderer->max = $max;
-        }
-
-        $this->renderer->render($lines);
+        $this->renderer->render($this->parser->parse());
     }
 
     /**
