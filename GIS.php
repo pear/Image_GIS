@@ -27,9 +27,9 @@ require_once 'Image/GIS/Renderer.php';
 * Germany city of Kiel which is Jan's home town:
 *
 *   <?php
-*   require_once 'Image/GIS/Map.php';
+*   require_once 'Image/GIS.php';
 *
-*   $map = new Image_GIS_Map(960, 1280);
+*   $map = new Image_GIS(960, 1280);
 *   $map->setRange(9.7, 10.5, 54.2, 54.7);
 *
 *   $map->draw('germany_rdline.e00', 'gray');
@@ -43,7 +43,7 @@ require_once 'Image/GIS/Renderer.php';
 * @version  $Revision$
 * @since    Image_GIS 1.0.0
 */
-class Image_GIS_Map {
+class Image_GIS {
     /**
     * Set to TRUE to enable debugging.
     *
@@ -75,7 +75,7 @@ class Image_GIS_Map {
     * @param  boolean $debug
     * @access public
     */
-    function Image_GIS_Map($width, $height = -1, $parser = 'E00', $renderer = 'GD', $debug = false) {
+    function Image_GIS($width, $height = -1, $parser = 'E00', $renderer = 'GD', $debug = false) {
         $this->debug = $debug;
 
         $this->setRenderer($renderer, $width, $height);

@@ -37,19 +37,22 @@ produce images using GD or Scalable Vector Graphics (SVG).
 ]]>
     </notes>
     <filelist>
-      <dir name="/" baseinstalldir="Image/GIS">
-        <dir name="Parser">
-          <file role="php" name="GD.php"/>
-          <file role="php" name="SVG.php"/>
+      <dir name="/" baseinstalldir="Image">
+        <dir name="GIS">
+          <dir name="Parser">
+            <file role="php" name="GD.php"/>
+            <file role="php" name="SVG.php"/>
+          </dir>
+
+          <dir name="Renderer">
+            <file role="php" name="E00.php"/>
+          </dir>
+
+          <file role="php" name="Parser.php"/>
+          <file role="php" name="Renderer.php"/>
         </dir>
 
-        <dir name="Renderer">
-          <file role="php" name="E00.php"/>
-        </dir>
-
-        <file role="php" name="Map.php"/>
-        <file role="php" name="Parser.php"/>
-        <file role="php" name="Renderer.php"/>
+        <file role="php" name="GIS.php"/>
       </dir>
     </filelist>
     <deps>
