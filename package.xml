@@ -30,7 +30,7 @@ produce images using GD or Scalable Vector Graphics (SVG).
   <release>
     <version>1.0.0</version>
     <state>stable</state>
-    <date>2002-XX-XX</date>
+    <date>2002-12-30</date>
     <notes>
 <![CDATA[
 * Initial release.
