@@ -147,6 +147,7 @@ class Image_GIS_Renderer {
     *
     * @return array
     * @access public
+    * @since  Image_GIS 1.0.1
     */
     function getRange() {
         return array(

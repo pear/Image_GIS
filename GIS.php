@@ -109,6 +109,7 @@ class Image_GIS {
     *
     * @return array
     * @access public
+    * @since  Image_GIS 1.0.1
     */
     function getRange() {
         return $this->renderer->getRange();
