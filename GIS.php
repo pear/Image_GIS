@@ -82,13 +82,14 @@ class Image_GIS {
     * @param  integer $height
     * @param  string  $renderer
     * @param  string  $parser
+    * @param  boolean $cache
     * @param  boolean $debug
     * @access public
     */
-    function Image_GIS($width, $height = -1, $renderer = 'GD', $parser = 'E00', $debug = false) {
+    function Image_GIS($width, $height = -1, $renderer = 'GD', $parser = 'E00', $cache = true, $debug = false) {
         $this->debug = $debug;
 
-        $this->setParser($parser);
+        $this->setParser($parser, $cache);
         $this->setRenderer($renderer, $width, $height);
     }
 
@@ -142,10 +143,11 @@ class Image_GIS {
     * to parse a data file.
     *
     * @param  string  $parser
+    * @param  boolean $cache
     * @access public
     */
-    function setParser($parser) {
-        $this->parser = &Image_GIS_Parser::factory($parser, $this->debug);
+    function setParser($parser, $cache) {
+        $this->parser = &Image_GIS_Parser::factory($parser, $this->cache, $this->debug);
     }
 
     /**

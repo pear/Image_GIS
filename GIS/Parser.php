@@ -57,27 +57,32 @@ class Image_GIS_Parser {
     /**
     * Constructor.
     *
+    * @param  boolean $cache
     * @param  boolean $debug
     * @access public
     */
-    function Image_GIS_Parser($debug) {
-        $this->cache = new Cache_Lite;
+    function Image_GIS_Parser($cache, $debug) {
+        if ($cache) {
+            $this->cache = new Cache_Lite;
+        }
+
         $this->debug = $debug;
     }
 
     /**
     * Factory.
     *
-    * @param  string             $parser
-    * @param  boolean            $debug
+    * @param  string  $parser
+    * @param  boolean $cache
+    * @param  boolean $debug
     * @return object
     * @access public
     */
-    function &factory($parser, $debug) {
+    function &factory($parser, $cache, $debug) {
         include_once 'Image/GIS/Parser/' . $parser . '.php';
 
         $class = 'Image_GIS_Parser_' . $parser;
-        return new $class($debug);
+        return new $class($cache, $debug);
     }
 
     /**

@@ -29,11 +29,12 @@ class Image_GIS_Parser_E00 extends Image_GIS_Parser {
     /**
     * Constructor.
     *
+    * @param  boolean $cache
     * @param  boolean $debug
     * @access public
     */
-    function Image_GIS_Parser_E00($debug) {
-        $this->Image_GIS_Parser($debug);
+    function Image_GIS_Parser_E00($cache, $debug) {
+        $this->Image_GIS_Parser($cache, $debug);
     }
 
     /**
