@@ -196,21 +196,18 @@ class Image_GIS_Renderer {
     */
     function render($lineSets) {
         if ($this->min == false || $this->max == false) {
-            $this->min = array(
-              'x' => 0,
-              'y' => 0
-            );
-
-            $this->max = array(
-              'x' => 0,
-              'y' => 0
-            );
-
             foreach ($lineSets as $lineSet) {
+		    if ($this->min == false) {
+			    $this->min['x'] = $lineSet->min['x'];
+			    $this->min['y'] = $lineSet->min['y'];
+			    $this->max['x'] = $lineSet->max['x'];
+			    $this->max['y'] = $lineSet->max['y'];
+		    } else {
                 $this->min['x'] = min($this->min['x'], $lineSet->min['x']);
                 $this->min['y'] = min($this->min['y'], $lineSet->min['y']);
                 $this->max['x'] = max($this->max['x'], $lineSet->max['x']);
                 $this->max['y'] = max($this->max['y'], $lineSet->max['y']);
+		    }
             }
         }
 
