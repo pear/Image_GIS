@@ -28,9 +28,9 @@ produce images using GD or Scalable Vector Graphics (SVG).
   </maintainers>
   <license>PHP License</license>
   <release>
-    <version>1.1.0-dev</version>
-    <state>devel</state>
-    <date>YYYY-MM-DD</date>
+    <version>1.1.0</version>
+    <state>stable</state>
+    <date>2004-01-06</date>
     <notes>
 <![CDATA[
 + Added caching of parsed data files.
@@ -47,6 +47,8 @@ produce images using GD or Scalable Vector Graphics (SVG).
   XML_Tree package.
 
 * Factored the handling of Line Sets out into a separate class.
+
+* Fixed handling of negative coordinates.
 
 * Fixed a bug that kept a debugging message from beeing printed.
 
