@@ -31,7 +31,7 @@ class Image_GIS_Parser {
     *
     * @var Cache_Lite $cache
     */
-    var $cache;
+    var $cache = NULL;
 
     /**
     * Data Files.
@@ -106,7 +106,8 @@ class Image_GIS_Parser {
         foreach ($this->dataFiles as $dataFile => $color) {
             $cacheID = md5($dataFile . '_' . $color);
 
-            if ($lineSet = $this->cache->get($cacheID, 'Image_GIS')) {
+            if (is_object($this->cache) &&
+                $lineSet = $this->cache->get($cacheID, 'Image_GIS')) {
                 $lineSet = unserialize($lineSet);
             } else {
                 $lineSet = $this->parseFile($dataFile, $color);
