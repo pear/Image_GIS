@@ -19,12 +19,16 @@
 require_once 'Image/Color.php';
 
 /**
-* Renderer Base Class.
-*
-* @version  $Revision$
-* @since    Image_GIS 1.0.0
-* @abstract
-*/
+ * Renderer Base Class.
+ *
+ * @author      Jan Kneschke <jan@kneschke.de>
+ * @author      Sebastian Bergmann <sb@sebastian-bergmann.de>
+ * @copyright   Copyright &copy; 2002-2004 Jan Kneschke <jan@kneschke.de> and Sebastian Bergmann <sb@sebastian-bergmann.de>
+ * @license     http://www.php.net/license/3_0.txt The PHP License, Version 3.0
+ * @category    Image
+ * @package     Image_GIS
+ * @abstract
+ */
 abstract class Image_GIS_Renderer {
     /**
     * Set to TRUE to enable debugging.

@@ -21,44 +21,49 @@ require_once 'Image/GIS/Parser.php';
 require_once 'Image/GIS/Renderer.php';
 
 /**
-* The following example draws the region around the
-* German city of Kiel which is Jan's home town:
-*
-*   <?php
-*   require_once 'Image/GIS.php';
-*
-*   // Create new map.
-*   $map = new Image_GIS(
-*     array(
-*       'width'  =>  960,
-*       'height' => 1280,
-*       'range'  => array(
-*         'x1' => 9.7,
-*         'x2' => 10.5,
-*         'y1' => 54.2,
-*         'y2' => 54.7
-*       )
-*     )
-*   );
-*
-*   // Political
-*   $map->addDataFile('germany_ponet.e00',  'black');
-*
-*   // Roads
-*   $map->addDataFile('germany_rdline.e00', 'gray');
-*
-*   // Populated Places
-*   $map->addDataFile('germany_pppoly.e00', 'green');
-*
-*   // Drainage
-*   $map->addDataFile('germany_dnnet.e00',  'blue');
-*
-*   $map->saveImage('kiel.png');
-*   ?>
-*
-* @version  $Revision$
-* @since    Image_GIS 1.0.0
-*/
+ * The following example draws the region around the
+ * German city of Kiel which is Jan's home town:
+ *
+ * <code>
+ * <?php
+ * require_once 'Image/GIS.php';
+ *
+ * // Create new map.
+ * $map = new Image_GIS(
+ *   array(
+ *     'width'  =>  960,
+ *     'height' => 1280,
+ *     'range'  => array(
+ *       'x1' => 9.7,
+ *       'x2' => 10.5,
+ *       'y1' => 54.2,
+ *       'y2' => 54.7
+ *     )
+ *   )
+ * );
+ *
+ * // Political
+ * $map->addDataFile('germany_ponet.e00',  'black');
+ *
+ * // Roads
+ * $map->addDataFile('germany_rdline.e00', 'gray');
+ *
+ * // Populated Places
+ * $map->addDataFile('germany_pppoly.e00', 'green');
+ *
+ * // Drainage
+ * $map->addDataFile('germany_dnnet.e00',  'blue');
+ *
+ * $map->saveImage('kiel.png');
+ * ?>
+ * </code>
+ *
+ * @author      Sebastian Bergmann <sb@sebastian-bergmann.de>
+ * @copyright   Copyright &copy; 2002-2004 Jan Kneschke <jan@kneschke.de> and Sebastian Bergmann <sb@sebastian-bergmann.de>
+ * @license     http://www.php.net/license/3_0.txt The PHP License, Version 3.0
+ * @category    Image
+ * @package     Image_GIS
+ */
 class Image_GIS {
     /**
     * Set to TRUE to enable debugging.

@@ -19,11 +19,15 @@
 require_once 'Image/GIS/Renderer.php';
 
 /**
-* GD Renderer.
-*
-* @version  $Revision$
-* @since    Image_GIS 1.0.0
-*/
+ * GD Renderer.
+ *
+ * @author      Jan Kneschke <jan@kneschke.de>
+ * @author      Sebastian Bergmann <sb@sebastian-bergmann.de>
+ * @copyright   Copyright &copy; 2002-2004 Jan Kneschke <jan@kneschke.de> and Sebastian Bergmann <sb@sebastian-bergmann.de>
+ * @license     http://www.php.net/license/3_0.txt The PHP License, Version 3.0
+ * @category    Image
+ * @package     Image_GIS
+ */
 class Image_GIS_Renderer_GD extends Image_GIS_Renderer {
     /**
     * GD Image Ressource.

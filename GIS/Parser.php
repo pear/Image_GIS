@@ -20,11 +20,14 @@ require_once 'Cache/Lite.php';
 require_once 'Image/GIS/LineSet.php';
 
 /**
-* Parser Base Class.
-*
-* @version  $Revision$
-* @since    Image_GIS 1.0.0
-*/
+ * Parser Base Class.
+ *
+ * @author      Sebastian Bergmann <sb@sebastian-bergmann.de>
+ * @copyright   Copyright &copy; 2002-2004 Jan Kneschke <jan@kneschke.de> and Sebastian Bergmann <sb@sebastian-bergmann.de>
+ * @license     http://www.php.net/license/3_0.txt The PHP License, Version 3.0
+ * @category    Image
+ * @package     Image_GIS
+ */
 abstract class Image_GIS_Parser {
     /**
     * Cache.
