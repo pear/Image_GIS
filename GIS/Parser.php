@@ -25,34 +25,34 @@ require_once 'Image/GIS/LineSet.php';
 * @version  $Revision$
 * @since    Image_GIS 1.0.0
 */
-class Image_GIS_Parser {
+abstract class Image_GIS_Parser {
     /**
     * Cache.
     *
     * @var Cache_Lite $cache
     */
-    var $cache = NULL;
+    protected $cache = NULL;
 
     /**
     * Data Files.
     *
     * @var array $dataFiles
     */
-    var $dataFiles = array();
+    protected $dataFiles = array();
 
     /**
     * Set to TRUE to enable debugging.
     *
     * @var boolean $debug
     */
-    var $debug;
+    protected $debug;
 
     /**
     * Line Set.
     *
     * @var array $lineSets
     */
-    var $lineSets = array();
+    protected $lineSets = array();
 
     /**
     * Constructor.
@@ -61,7 +61,7 @@ class Image_GIS_Parser {
     * @param  boolean $debug
     * @access public
     */
-    function Image_GIS_Parser($cache, $debug) {
+    public function Image_GIS_Parser($cache, $debug) {
         if ($cache) {
             $this->cache = new Cache_Lite;
         }
@@ -78,7 +78,7 @@ class Image_GIS_Parser {
     * @return object
     * @access public
     */
-    function &factory($parser, $cache, $debug) {
+    public static function factory($parser, $cache, $debug) {
         include_once 'Image/GIS/Parser/' . $parser . '.php';
 
         $class  = 'Image_GIS_Parser_' . $parser;
@@ -94,7 +94,7 @@ class Image_GIS_Parser {
     * @param  mixed   $color
     * @access public
     */
-    function addDataFile($dataFile, $color) {
+    public function addDataFile($dataFile, $color) {
         $this->dataFiles[$dataFile] = $color;
     }
 
@@ -104,7 +104,7 @@ class Image_GIS_Parser {
     * @access public
     * @return array
     */
-    function parse() {
+    public function parse() {
         foreach ($this->dataFiles as $dataFile => $color) {
             $cacheID = md5($dataFile . '_' . $color);
             $lineSet = false;
@@ -137,6 +137,6 @@ class Image_GIS_Parser {
     * @access public
     * @abstract
     */
-    function parseFile($dataFile, $color) { /* abstract */ }
+    public abstract function parseFile($dataFile, $color);
 }
 ?>

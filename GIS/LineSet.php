@@ -26,17 +26,17 @@ class Image_GIS_LineSet {
     /**
     * @var array $color
     */
-    var $color = 'black';
+    public $color = 'black';
 
     /**
     * @var array $lines
     */
-    var $lines = array();
+    public $lines = array();
 
     /**
     * @var array $min
     */
-    var $min = array(
+    public $min = array(
       'x' => 0,
       'y' => 0
     );
@@ -44,7 +44,7 @@ class Image_GIS_LineSet {
     /**
     * @var array $max
     */
-    var $max = array(
+    public $max = array(
       'x' => 0,
       'y' => 0
     );
@@ -55,7 +55,7 @@ class Image_GIS_LineSet {
     * @param  string $color
     * @access public
     */
-    function Image_GIS_LineSet($color = 'black') {
+    public function Image_GIS_LineSet($color = 'black') {
         $this->color = $color;
     }
 
@@ -68,7 +68,7 @@ class Image_GIS_LineSet {
     * @param  float $y2
     * @access public
     */
-    function addLine($x1, $y1, $x2, $y2) {
+    public function addLine($x1, $y1, $x2, $y2) {
         $this->lines[] = array($x1, $y1, $x2, $y2);
 
         $this->min['x'] = min($this->min['x'], $x1, $x2);

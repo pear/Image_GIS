@@ -65,21 +65,21 @@ class Image_GIS {
     *
     * @var boolean $debug
     */
-    var $debug;
+    private $debug;
 
     /**
     * Image_GIS_Parser sub-class object.
     *
     * @var Image_GIS_Parser $parser
     */
-    var $parser;
+    private $parser;
 
     /**
     * Image_GIS_Renderer sub-class object.
     *
     * @var Image_GIS_Renderer $renderer
     */
-    var $renderer;
+    private $renderer;
 
     /**
     * Constructor.
@@ -87,7 +87,7 @@ class Image_GIS {
     * @param  array   $parameters
     * @access public
     */
-    function Image_GIS($parameters = array()) {
+    public function Image_GIS($parameters = array()) {
         $this->debug = isset($parameters['debug']) ? $parameters['debug'] : false;
 
         $this->setParser(
@@ -123,7 +123,7 @@ class Image_GIS {
     * @return boolean
     * @access public
     */
-    function addDataFile($dataFile, $color) {
+    public function addDataFile($dataFile, $color) {
         return $this->parser->addDataFile($dataFile, $color);
     }
 
@@ -134,7 +134,7 @@ class Image_GIS {
     * @access public
     * @since  Image_GIS 1.0.1
     */
-    function getRange() {
+    public function getRange() {
         return $this->renderer->getRange();
     }
 
@@ -143,7 +143,7 @@ class Image_GIS {
     *
     * @access public
     */
-    function render() {
+    public function render() {
         $this->renderer->render($this->parser->parse());
     }
 
@@ -154,7 +154,7 @@ class Image_GIS {
     * @return boolean
     * @access public
     */
-    function saveImage($filename) {
+    public function saveImage($filename) {
         $this->render();
 
         return $this->renderer->saveImage($filename);
@@ -168,8 +168,8 @@ class Image_GIS {
     * @param  boolean $cache
     * @access public
     */
-    function setParser($parser, $cache) {
-        $this->parser = &Image_GIS_Parser::factory($parser, $cache, $this->debug);
+    public function setParser($parser, $cache) {
+        $this->parser = Image_GIS_Parser::factory($parser, $cache, $this->debug);
     }
 
     /**
@@ -181,7 +181,7 @@ class Image_GIS {
     * @param  float $y2
     * @access public
     */
-    function setRange($x1, $x2, $y1, $y2) {
+    public function setRange($x1, $x2, $y1, $y2) {
         $this->renderer->setRange($x1, $x2, $y1, $y2);
     }
 
@@ -192,8 +192,8 @@ class Image_GIS {
     * @param  string  $renderer
     * @access public
     */
-    function setRenderer($renderer, $width, $height) {
-        $this->renderer = &Image_GIS_Renderer::factory($renderer, $width, $height, $this->debug);
+    public function setRenderer($renderer, $width, $height) {
+        $this->renderer = Image_GIS_Renderer::factory($renderer, $width, $height, $this->debug);
     }
 
     /**
@@ -201,9 +201,8 @@ class Image_GIS {
     *
     * @access public
     */
-    function showImage() {
+    public function showImage() {
         $this->render();
-
         $this->renderer->showImage();
     }
 }
