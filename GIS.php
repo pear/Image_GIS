@@ -105,6 +105,16 @@ class Image_GIS {
     }
 
     /**
+    * Returns the range of the data to be rendered.
+    *
+    * @return array
+    * @access public
+    */
+    function getRange() {
+        return $this->renderer->getRange();
+    }
+
+    /**
     * Renders the image.
     *
     * @access public

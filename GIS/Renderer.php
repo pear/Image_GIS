@@ -143,6 +143,21 @@ class Image_GIS_Renderer {
     }
 
     /**
+    * Returns the range of the data to be rendered.
+    *
+    * @return array
+    * @access public
+    */
+    function getRange() {
+        return array(
+          $this->min['x'],
+          $this->max['x'],
+          $this->min['y'],
+          $this->max['y']
+        );
+    }
+
+    /**
     * Converts a polar coordinate to an image coordinate.
     *
     * @param  float  $polarCoordinate

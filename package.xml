@@ -28,12 +28,15 @@ produce images using GD or Scalable Vector Graphics (SVG).
   </maintainers>
   <license>PHP License</license>
   <release>
-    <version>1.0.0</version>
-    <state>stable</state>
-    <date>2002-12-30</date>
+    <version>1.0.1-dev</version>
+    <state>devel</state>
+    <date>YYYY-MM-DD</date>
     <notes>
 <![CDATA[
-* Initial release.
+* Added getRange() method to the Image_GIS and Image_GIS_Renderer
+  classes.
+
+* Fixed a bug that kept a debugging message from beeing printed.
 ]]>
     </notes>
     <filelist>
@@ -61,4 +64,16 @@ produce images using GD or Scalable Vector Graphics (SVG).
       <dep type="pkg" rel="has">XML_Tree</dep>
     </deps>
   </release>
+  <changelog>
+    <release>
+      <version>1.0.0</version>
+      <state>stable</state>
+      <date>2002-12-30</date>
+      <notes>
+<![CDATA[
+* Initial release.
+]]>
+      </notes>
+    </release>
+  </changelog>
 </package>
