@@ -98,6 +98,18 @@ class Image_GIS {
           isset($parameters['width'])    ? $parameters['width']    : 640,
           isset($parameters['height'])   ? $parameters['height']   : 480
         );
+
+        if (isset($parameters['range']['x1']) &&
+            isset($parameters['range']['x2']) &&
+            isset($parameters['range']['y1']) &&
+            isset($parameters['range']['y2'])) {
+            $this->setRange(
+              $parameters['range']['x1'],
+              $parameters['range']['x2'],
+              $parameters['range']['y1'],
+              $parameters['range']['y2']
+            );
+        }
     }
 
     /**
