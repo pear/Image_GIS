@@ -30,7 +30,10 @@ require_once 'Image/GIS/Renderer.php';
 *   require_once 'Image/GIS.php';
 *
 *   // Create new map.
-*   $map = new Image_GIS(960, 1280);
+*   $map = new Image_GIS(
+*     'width'  =>  960,
+*     'height' => 1280
+*   );
 *
 *   // Political
 *   $map->addDataFile('germany_ponet.e00',  'black');
@@ -78,19 +81,23 @@ class Image_GIS {
     /**
     * Constructor.
     *
-    * @param  mixed   $width
-    * @param  integer $height
-    * @param  string  $renderer
-    * @param  string  $parser
-    * @param  boolean $cache
-    * @param  boolean $debug
+    * @param  array   $parameters
     * @access public
     */
-    function Image_GIS($width, $height = -1, $renderer = 'GD', $parser = 'E00', $cache = true, $debug = false) {
-        $this->debug = $debug;
+    function Image_GIS($parameters = array()) {
+        $this->debug = isset($parameters['debug']) ? $parameters['debug'] : false;
 
-        $this->setParser($parser, $cache);
-        $this->setRenderer($renderer, $width, $height);
+        $this->setParser(
+          isset($parameters['parser'])   ? $parameters['parser']   : 'E00',
+          isset($parameters['cache'])    ? $parameters['cache']    : false,
+          isset($parameters['cacheDir']) ? $parameters['cacheDir'] : '/tmp'
+        );
+
+        $this->setRenderer(
+          isset($parameters['renderer']) ? $parameters['renderer'] : 'GD',
+          isset($parameters['width'])    ? $parameters['width']    : 640,
+          isset($parameters['height'])   ? $parameters['height']   : 480
+        );
     }
 
     /**
@@ -147,7 +154,7 @@ class Image_GIS {
     * @access public
     */
     function setParser($parser, $cache) {
-        $this->parser = &Image_GIS_Parser::factory($parser, $this->cache, $this->debug);
+        $this->parser = &Image_GIS_Parser::factory($parser, $cache, $this->debug);
     }
 
     /**
