@@ -36,8 +36,8 @@ require_once 'Image/GIS/Renderer.php';
 *   $map->draw('germany_pppoly.e00', 'green');
 *   $map->draw('germany_dnnet.e00',  'blue');
 *   $map->draw('germany_ponet.e00',  'black');
-
-*   $map->saveImage('test.png');
+*
+*   $map->saveImage('kiel.png');
 *   ?>
 *
 * @version  $Revision$
