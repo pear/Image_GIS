@@ -28,9 +28,9 @@ produce images using GD or Scalable Vector Graphics (SVG).
   </maintainers>
   <license>PHP License</license>
   <release>
-    <version>1.1.1dev</version>
+    <version>1.1.1</version>
     <state>devel</state>
-    <date>200Y-MM-DD</date>
+    <date>2004-08-25</date>
     <notes>
 <![CDATA[
 * Fixed bug #1179.
