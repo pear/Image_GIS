@@ -32,10 +32,10 @@ require_once 'Image/GIS/Renderer.php';
 *   $map = new Image_GIS(960, 1280);
 *   $map->setRange(9.7, 10.5, 54.2, 54.7);
 *
-*   $map->draw('germany_rdline.e00', 'gray');
-*   $map->draw('germany_pppoly.e00', 'green');
-*   $map->draw('germany_dnnet.e00',  'blue');
-*   $map->draw('germany_ponet.e00',  'black');
+*   $map->addDataFile('germany_rdline.e00', 'gray');
+*   $map->addDataFile('germany_pppoly.e00', 'green');
+*   $map->addDataFile('germany_dnnet.e00',  'blue');
+*   $map->addDataFile('germany_ponet.e00',  'black');
 *
 *   $map->saveImage('kiel.png');
 *   ?>
@@ -70,29 +70,37 @@ class Image_GIS {
     *
     * @param  mixed   $width
     * @param  integer $height
-    * @param  string  $parser
     * @param  string  $renderer
+    * @param  string  $parser
     * @param  boolean $debug
     * @access public
     */
-    function Image_GIS($width, $height = -1, $parser = 'E00', $renderer = 'GD', $debug = false) {
+    function Image_GIS($width, $height = -1, $renderer = 'GD', $parser = 'E00', $debug = false) {
         $this->debug = $debug;
 
-        $this->setRenderer($renderer, $width, $height);
         $this->setParser($parser);
-        $this->setRange(9, 11, 55, 54);
+        $this->setRenderer($renderer, $width, $height);
     }
 
     /**
-    * Draws a datafile.
+    * Adds a datafile to the map.
     *
     * @param  string  $dataFile
     * @param  mixed   $color
     * @return boolean
     * @access public
     */
-    function draw($dataFile, $color) {
-        return $this->parser->draw($dataFile, $color);
+    function addDataFile($dataFile, $color) {
+        return $this->parser->addDataFile($dataFile, $color);
+    }
+
+    /**
+    * Renders the image.
+    *
+    * @access public
+    */
+    function render() {
+        $this->renderer->render($this->parser->parse());
     }
 
     /**
@@ -103,6 +111,8 @@ class Image_GIS {
     * @access public
     */
     function saveImage($filename) {
+        $this->render();
+
         return $this->renderer->saveImage($filename);
     }
 
@@ -114,7 +124,7 @@ class Image_GIS {
     * @access public
     */
     function setParser($parser) {
-        $this->parser = &Image_GIS_Parser::factory($parser, $this->renderer, $this->debug);
+        $this->parser = &Image_GIS_Parser::factory($parser, $this->debug);
     }
 
     /**
@@ -147,6 +157,8 @@ class Image_GIS {
     * @access public
     */
     function showImage() {
+        $this->render();
+
         $this->renderer->showImage();
     }
 }

@@ -65,6 +65,8 @@ class Image_GIS_Renderer {
     * @access public
     */
     function Image_GIS_Renderer($width, $height, $debug) {
+        $this->debug  = $debug;
+
         if ($width < 0 ||
             $width > 2048) {
             $width = 640;
@@ -77,8 +79,7 @@ class Image_GIS_Renderer {
 
         $this->width  = $width;
         $this->height = $height;
-        $this->debug  = $debug;
-    }
+   }
 
     /**
     * Factory.
@@ -149,12 +150,30 @@ class Image_GIS_Renderer {
     * @access public
     */
     function polar2image($polarCoordinate, $direction) {
-        if ($direction == 'y') {
-            return ($polarCoordinate - $this->max[$direction]) *
-                   ($this->height / ($this->min[$direction] - $this->max[$direction]));
-        } else {
-            return ($polarCoordinate - $this->min[$direction]) *
-                   ($this->width / ($this->max[$direction] - $this->min[$direction]));
+        switch ($direction) {
+            case 'x': {
+                return ($polarCoordinate - $this->min[$direction]) *
+                       ($this->width / ($this->max[$direction] - $this->min[$direction]));
+            }
+            break;
+
+            case 'y': {
+                return ($polarCoordinate - $this->max[$direction]) *
+                       ($this->height / ($this->min[$direction] - $this->max[$direction]));
+            }
+            break;
+        }
+    }
+
+    /**
+    * Renders the image.
+    *
+    * @param  array $lines
+    * @access public
+    */
+    function render($lines) {
+        foreach ($lines as $line) {
+            $this->drawClippedLine($line[0], $line[1], $line[2], $line[3], $line[4]);
         }
     }
 

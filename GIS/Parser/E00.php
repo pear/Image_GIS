@@ -28,23 +28,22 @@ class Image_GIS_Parser_E00 extends Image_GIS_Parser {
     /**
     * Constructor.
     *
-    * @param  Image_GIS_Renderer $renderer
-    * @param  boolean            $debug
+    * @param  boolean $debug
     * @access public
     */
-    function Image_GIS_Parser_E00(&$renderer, $debug) {
-        $this->Image_GIS_Parser($renderer, $debug);
+    function Image_GIS_Parser_E00($debug) {
+        $this->Image_GIS_Parser($debug);
     }
 
     /**
-    * Draws a datafile.
+    * Parses a data file.
     *
     * @param  string  $dataFile
     * @param  mixed   $color
     * @return boolean
     * @access public
     */
-    function draw($dataFile, $color) {
+    function parseFile($dataFile, $color) {
         if ($fp = @fopen($dataFile, 'r')) {
             $numRecords = 0;
             $ln         = 0;
@@ -68,12 +67,12 @@ class Image_GIS_Parser_E00 extends Image_GIS_Parser {
 
                     if ($pl['x'] != -1 &&
                         $pl['y'] != -1) {
-                        $this->renderer->drawClippedLine($pl['x'], $pl['y'], $a[1], $a[2], $color);
+                        $this->lines[] = array($pl['x'], $pl['y'], $a[1], $a[2], $color);
                     }
 
                     $numRecords--;
 
-                    $this->renderer->drawClippedLine($a[1], $a[2], $a[3], $a[4], $color);
+                    $this->lines[] = array($a[1], $a[2], $a[3], $a[4], $color);
 
                     $pl['x'] = $a[3];
                     $pl['y'] = $a[4];
@@ -85,7 +84,7 @@ class Image_GIS_Parser_E00 extends Image_GIS_Parser {
                          preg_match("#^ ([0-9]\.[0-9]{7}E[-+][0-9]{2}) ([0-9]\.[0-9]{7}E[-+][0-9]{2})#", $line, $a)) {
                     if ($pl['x'] != -1 &&
                         $pl['y'] != -1) {
-                        $this->renderer->drawClippedLine($pl['x'], $pl['y'], $a[1], $a[2], $color);
+                        $this->lines[] = array($pl['x'], $pl['y'], $a[1], $a[2], $color);
 
                         $pl['x'] = $a[1];
                         $pl['y'] = $a[2];

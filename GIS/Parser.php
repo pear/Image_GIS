@@ -24,6 +24,13 @@
 */
 class Image_GIS_Parser {
     /**
+    * Data Files.
+    *
+    * @var array $dataFiles
+    */
+    var $dataFiles = array();
+
+    /**
     * Set to TRUE to enable debugging.
     *
     * @var boolean $debug
@@ -31,38 +38,70 @@ class Image_GIS_Parser {
     var $debug;
 
     /**
-    * Image_GIS_Renderer sub-class object.
+    * Lines.
     *
-    * @var Image_GIS_Renderer $renderer
+    * @var array $lines
     */
-    var $renderer;
+    var $lines = array();
 
     /**
     * Constructor.
     *
-    * @param  Image_GIS_Renderer $renderer
-    * @param  boolean            $debug
+    * @param  boolean $debug
     * @access public
     */
-    function Image_GIS_Parser(&$renderer, $debug) {
-        $this->renderer = &$renderer;
-        $this->debug    = $debug;
+    function Image_GIS_Parser($debug) {
+        $this->debug = $debug;
     }
 
     /**
     * Factory.
     *
     * @param  string             $parser
-    * @param  Image_GIS_Renderer $renderer
     * @param  boolean            $debug
     * @return object
     * @access public
     */
-    function &factory($parser, &$renderer, $debug) {
+    function &factory($parser, $debug) {
         include_once 'Image/GIS/Parser/' . $parser . '.php';
 
         $class = 'Image_GIS_Parser_' . $parser;
-        return new $class($renderer, $debug);
+        return new $class($debug);
     }
+
+    /**
+    * Adds a datafile to the map.
+    *
+    * @param  string  $dataFile
+    * @param  mixed   $color
+    * @access public
+    */
+    function addDataFile($dataFile, $color) {
+        $this->dataFiles[$dataFile] = $color;
+    }
+
+    /**
+    * Parses the data files of the map.
+    *
+    * @access public
+    * @return array
+    */
+    function parse() {
+        foreach ($this->dataFiles as $dataFile => $color) {
+            $this->parseFile($dataFile, $color);
+        }
+
+        return $this->lines;
+    }
+
+    /**
+    * Parses a data file.
+    *
+    * @param  string  $dataFile
+    * @param  mixed   $color
+    * @access public
+    * @abstract
+    */
+    function parseFile($dataFile, $color) { /* abstract */ }
 }
 ?>
