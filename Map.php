@@ -29,13 +29,14 @@ require_once 'Image/GIS/Renderer.php';
 *   <?php
 *   require_once 'Image/GIS/Map.php';
 *
-*   $map = new Image_GIS_Map(960, 1280, 'E00', 'GD', false);
+*   $map = new Image_GIS_Map(960, 1280);
 *   $map->setRange(9.7, 10.5, 54.2, 54.7);
 *
-*   $map->draw("./data/germany_rdline.e00", 'gray');
-*   $map->draw("./data/germany_pppoly.e00", 'green');
-*   $map->draw("./data/germany_dnnet.e00", 'blue');
-*   $map->draw("./data/germany_ponet.e00", 'black');
+*   $map->draw('germany_rdline.e00', 'gray');
+*   $map->draw('germany_pppoly.e00', 'green');
+*   $map->draw('germany_dnnet.e00',  'blue');
+*   $map->draw('germany_ponet.e00',  'black');
+
 *   $map->saveImage('test.png');
 *   ?>
 *
