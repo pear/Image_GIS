@@ -28,7 +28,7 @@ produce images using GD or Scalable Vector Graphics (SVG).
   </maintainers>
   <license>PHP License</license>
   <release>
-    <version>1.0.1-dev</version>
+    <version>1.1.0-dev</version>
     <state>devel</state>
     <date>YYYY-MM-DD</date>
     <notes>
@@ -46,6 +46,8 @@ produce images using GD or Scalable Vector Graphics (SVG).
 * Factored the handling of Line Sets out into a separate class.
 
 * Fixed a bug that kept a debugging message from beeing printed.
+
+* Fixed incompatibilities with PHP 5.
 ]]>
     </notes>
     <filelist>

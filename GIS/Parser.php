@@ -81,8 +81,10 @@ class Image_GIS_Parser {
     function &factory($parser, $cache, $debug) {
         include_once 'Image/GIS/Parser/' . $parser . '.php';
 
-        $class = 'Image_GIS_Parser_' . $parser;
-        return new $class($cache, $debug);
+        $class  = 'Image_GIS_Parser_' . $parser;
+        $object = new $class($cache, $debug);
+
+        return $object;
     }
 
     /**

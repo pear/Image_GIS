@@ -93,8 +93,10 @@ class Image_GIS_Renderer {
     */
     function &factory($renderer, $width, $height, $debug) {
         if (@include_once('Image/GIS/Renderer/' . $renderer . '.php')) {
-            $class = 'Image_GIS_Renderer_' . $renderer;
-            return new $class($width, $height, $debug);
+            $class  = 'Image_GIS_Renderer_' . $renderer;
+            $object = new $class($width, $height, $debug);
+
+            return $object;
         }
     }
 
