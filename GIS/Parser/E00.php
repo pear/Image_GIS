@@ -67,12 +67,12 @@ class Image_GIS_Parser_E00 extends Image_GIS_Parser {
 
                     if ($pl['x'] != -1 &&
                         $pl['y'] != -1) {
-                        $this->lines[] = array($pl['x'], $pl['y'], $a[1], $a[2], $color);
+                        $this->addLine($pl['x'], $pl['y'], $a[1], $a[2], $color);
                     }
 
                     $numRecords--;
 
-                    $this->lines[] = array($a[1], $a[2], $a[3], $a[4], $color);
+                    $this->addLine($a[1], $a[2], $a[3], $a[4], $color);
 
                     $pl['x'] = $a[3];
                     $pl['y'] = $a[4];
@@ -84,7 +84,7 @@ class Image_GIS_Parser_E00 extends Image_GIS_Parser {
                          preg_match("#^ ([0-9]\.[0-9]{7}E[-+][0-9]{2}) ([0-9]\.[0-9]{7}E[-+][0-9]{2})#", $line, $a)) {
                     if ($pl['x'] != -1 &&
                         $pl['y'] != -1) {
-                        $this->lines[] = array($pl['x'], $pl['y'], $a[1], $a[2], $color);
+                        $this->addLine($pl['x'], $pl['y'], $a[1], $a[2], $color);
 
                         $pl['x'] = $a[1];
                         $pl['y'] = $a[2];

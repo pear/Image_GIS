@@ -35,12 +35,12 @@ class Image_GIS_Renderer {
     /**
     * @var array $min
     */
-    var $min;
+    var $min = false;
 
     /**
     * @var array $max
     */
-    var $max;
+    var $max = false;
 
     /**
     * Width of the image.

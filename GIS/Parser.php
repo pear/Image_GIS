@@ -45,6 +45,22 @@ class Image_GIS_Parser {
     var $lines = array();
 
     /**
+    * @var array $min
+    */
+    var $min = array(
+      'x' => 0,
+      'y' => 0
+    );
+
+    /**
+    * @var array $max
+    */
+    var $max = array(
+      'x' => 0,
+      'y' => 0
+    );
+
+    /**
     * Constructor.
     *
     * @param  boolean $debug
@@ -70,6 +86,25 @@ class Image_GIS_Parser {
     }
 
     /**
+    * Adds a line to the map.
+    *
+    * @param  float $x1
+    * @param  float $y1
+    * @param  float $x2
+    * @param  float $y2
+    * @param  mixed $color
+    * @access public
+    */
+    function addLine($x1, $y1, $x2, $y2, $color) {
+        $this->lines[] = array($x1, $y1, $x2, $y2, $color);
+
+        $this->min['x'] = min($this->min['x'], $x1, $x2);
+        $this->min['y'] = min($this->min['y'], $y1, $y2);
+        $this->max['x'] = max($this->max['x'], $x1, $x2);
+        $this->max['y'] = max($this->max['y'], $y1, $y2);
+    }
+
+    /**
     * Adds a datafile to the map.
     *
     * @param  string  $dataFile
@@ -91,7 +126,7 @@ class Image_GIS_Parser {
             $this->parseFile($dataFile, $color);
         }
 
-        return $this->lines;
+        return array($this->lines, $this->min, $this->max);
     }
 
     /**
