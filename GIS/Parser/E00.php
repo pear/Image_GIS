@@ -102,12 +102,12 @@ class Image_GIS_Parser_E00 extends Image_GIS_Parser {
                 }
 
                 else if ($ln > 2) {
-		    if ($this->debug) {
-			printf(
-			       'Died at: %s<br />',
-			       $ln
-			       );
-		    }
+                    if ($this->debug) {
+                        printf(
+                          'Died at: %s<br />',
+                          $ln
+                        );
+                    }
 
                     break;
                 }
