@@ -21,23 +21,23 @@ require_once 'Image/GIS/Parser.php';
 require_once 'Image/GIS/Renderer.php';
 
 /**
-* ...
-*
 * The following example draws the region around the
-* Germany city of Kiel which is Jan's home town:
+* German city of Kiel which is Jan's home town:
 *
 *   <?php
 *   require_once 'Image/GIS.php';
 *
 *   // Create new map.
 *   $map = new Image_GIS(
-*     'width'  =>  960,
-*     'height' => 1280,
-*     'range'  => array(
-*       'x1' => 9.7,
-*       'x2' => 10.5,
-*       'y1' => 54.2,
-*       'y2' => 54.7
+*     array(
+*       'width'  =>  960,
+*       'height' => 1280,
+*       'range'  => array(
+*         'x1' => 9.7,
+*         'x2' => 10.5,
+*         'y1' => 54.2,
+*         'y2' => 54.7
+*       )
 *     )
 *   );
 *
