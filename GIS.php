@@ -32,7 +32,13 @@ require_once 'Image/GIS/Renderer.php';
 *   // Create new map.
 *   $map = new Image_GIS(
 *     'width'  =>  960,
-*     'height' => 1280
+*     'height' => 1280,
+*     'range'  => array(
+*       'x1' => 9.7,
+*       'x2' => 10.5,
+*       'y1' => 54.2,
+*       'y2' => 54.7
+*     )
 *   );
 *
 *   // Political
@@ -46,9 +52,6 @@ require_once 'Image/GIS/Renderer.php';
 *
 *   // Drainage
 *   $map->addDataFile('germany_dnnet.e00',  'blue');
-*
-*   // Set range to Kiel.
-*   $map->setRange(9.7, 10.5, 54.2, 54.7);
 *
 *   $map->saveImage('kiel.png');
 *   ?>
