@@ -29,13 +29,23 @@ require_once 'Image/GIS/Renderer.php';
 *   <?php
 *   require_once 'Image/GIS.php';
 *
+*   // Create new map.
 *   $map = new Image_GIS(960, 1280);
-*   $map->setRange(9.7, 10.5, 54.2, 54.7);
 *
-*   $map->addDataFile('germany_rdline.e00', 'gray');
-*   $map->addDataFile('germany_pppoly.e00', 'green');
-*   $map->addDataFile('germany_dnnet.e00',  'blue');
+*   // Political
 *   $map->addDataFile('germany_ponet.e00',  'black');
+*
+*   // Roads
+*   $map->addDataFile('germany_rdline.e00', 'gray');
+*
+*   // Populated Places
+*   $map->addDataFile('germany_pppoly.e00', 'green');
+*
+*   // Drainage
+*   $map->addDataFile('germany_dnnet.e00',  'blue');
+*
+*   // Set range to Kiel.
+*   $map->setRange(9.7, 10.5, 54.2, 54.7);
 *
 *   $map->saveImage('kiel.png');
 *   ?>
