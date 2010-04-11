@@ -129,7 +129,13 @@ class Image_GIS {
     * @access public
     */
     function addDataFile($dataFile, $color) {
-        return $this->parser->addDataFile($dataFile, $color);
+
+        if (file_exists($dataFile)) {
+            return $this->parser->addDataFile($dataFile, $color);
+        } else {
+            printf ("Data file '%s' does not exist.\n", $dataFile);
+            return false;
+        }
     }
 
     /**
