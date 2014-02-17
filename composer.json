@@ -1,0 +1,31 @@
+{
+    "authors": [
+        {
+            "email": "jan@kneschke.de",
+            "name": "Jan Kneschke",
+            "role": "Lead"
+        }
+    ],
+    "autoload": {
+        "psr-0": {
+            "Image_GIS": "./"
+        }
+    },
+    "description": "More info available on: http://pear.php.net/package/Image_GIS",
+    "include-path": [
+        "./"
+    ],
+    "license": "PHP License",
+    "name": "pear/image_gis",
+    "support": {
+        "issues": "http://pear.php.net/bugs/search.php?cmd=display&package_name[]=Image_GIS",
+        "source": "https://github.com/pear/Image_GIS"
+    },
+    "type": "library",
+    "require": {
+        "pear/pear_exception": "*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "*"
+    }
+}
